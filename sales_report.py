@@ -20,9 +20,10 @@
     # loop through the entire length of the salespeople list:
         # print the salesperson and the melons from melons_sold at the same index
 
+# refactored code to make a dictionary instead of two lists to pull info at the same index from each
 
-salespeople = []
-melons_sold = []
+
+salespeople_dict = {}
 
 f = open('sales-report.txt')
 
@@ -31,18 +32,20 @@ for line in f:
     line = line.rstrip()
     entries = line.split('|')
 
-    
     salesperson = entries[0]
     melons = int(entries[2])
 
-    if salesperson in salespeople:
-        position = salespeople.index(salesperson)
-
-        melons_sold[position] += melons
+    if salesperson in salespeople_dict:
+        salespeople_dict[salesperson] += melons
     else:
-        salespeople.append(salesperson)
-        melons_sold.append(melons)
+        salespeople_dict[salesperson] = melons
 
 
-for i in range(len(salespeople)):
-    print(f'{salespeople[i]} sold {melons_sold[i]} melons')
+for salesperson in salespeople_dict:
+    print(f"{salesperson} sold {salespeople_dict[salesperson]} melons")
+        
+        # f'{salespeople[i]} sold {melons_sold[i]} melons')
+
+
+
+
